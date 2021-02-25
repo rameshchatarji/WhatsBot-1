@@ -99,30 +99,30 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!term ")) { // Terminal
 
-            msg.delete(true)
+            
             var cmd = msg.body.replace("!term ", "")
             exec(cmd, (error, stdout, stderr) => {
                 if (error) {
-                    client.sendMessage(msg.to, "*whatsbot~: " + cmd + "* ```" + error + "```")
+                    client.sendMessage(msg.to, "*AloneBots~:* " + cmd + "\n```" + error + "```")
                 } else if (stderr) {
-                    client.sendMessage(msg.to, "*whatsbot~: " + cmd + "* ```" + stderr + "```")
+                    client.sendMessage(msg.to, "*AloneBots~:* " + cmd + "\n```" + stderr + "```")
                 } else {
-                    client.sendMessage(msg.to, "*whatsbot~: " + cmd + "* ```" + stdout + "```")
+                    client.sendMessage(msg.to, "*AloneBots~:* " + cmd + "\n```" + stdout + "```")
                 }
             })
 
         } else if (msg.body.startsWith("!help")) { // help module
 
-            msg.delete(true)
+            
             var data = await help.mainF(msg.body)
             client.sendMessage(msg.to, data)
 
         } else if (msg.body == "!ping") { // Ping command
 
-            msg.reply("Pong !!!");
+            msg.reply("*Pong!*\n```avg. 18ms```");
 
         } else if (msg.body == "!start") { // Start command
-            msg.delete(true)
+            
             var startdata = await start.get(await client.info.getBatteryStatus(), client.info.phone)
             client.sendMessage(msg.to, new MessageMedia(startdata.mimetype, startdata.data, startdata.filename), { caption: startdata.msg })
 
@@ -151,7 +151,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!zee5 ")) { // Zee5 Module
 
-            msg.delete(true)
+            
             var data = await zee.mainF(msg.body.replace("!zee5 ", ""));
             if (data == "error") {
                 client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch this Zee5 Content, Maybe it's a wrong url.```")
@@ -161,7 +161,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!jiosaavn ")) { // Jiosaavn Module
 
-            msg.delete(true)
+            
             var data = await saavn.mainF(msg.body.replace("!jiosaavn ", ""));
             if (data == "error") {
                 client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch this Jiosaavn Link, Maybe it's a wrong url.```")
@@ -171,7 +171,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!jiosaavn") && msg.hasQuotedMsg) { // Jiosaavn Module message reply
 
-            msg.delete(true)
+            
             var quotedMsg = await msg.getQuotedMessage();
             var data = await saavn.mainF(quotedMsg.body);
             if (data == "error") {
@@ -182,7 +182,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!carbon ")) { // Carbon Module
 
-            msg.delete(true)
+            
             var data = await carbon.mainF(msg.body.replace("!carbon ", ""));
             if (data == "error") {
                 client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to create the Carbon.```")
@@ -192,7 +192,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!carbon") && msg.hasQuotedMsg) { // Carbon Module message reply
 
-            msg.delete(true)
+            
             var quotedMsg = await msg.getQuotedMessage();
             var data = await carbon.mainF(quotedMsg.body);
             if (data == "error") {
@@ -203,19 +203,19 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!directlink") && msg.hasQuotedMsg) { // Telegraph Module
 
-            msg.delete(true)
+            
             var quotedMsg = await msg.getQuotedMessage();
             var attachmentData = await quotedMsg.downloadMedia();
             var data = await telegraph.mainF(attachmentData);
             if (data == "error") {
                 quotedMsg.reply(`Error occured while create direct link.`)
             } else {
-                quotedMsg.reply(`🔗 *Direct Link 👇*\n\n` + "```" + data + "```")
+                quotedMsg.reply(`🔗 *Direct Link:*\n\n` + "```" + data + "```")
             }
 
         } else if (msg.body.startsWith("!yt ")) { // Youtube Module
 
-            msg.delete(true)
+            
             var data = await youtube.mainF(msg.body.replace("!yt ", ""));
             if (data == "error") {
                 client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch the YouTube video```")
@@ -225,7 +225,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!yt") && msg.hasQuotedMsg) { // Youtube Module Reply
 
-            msg.delete(true)
+            
             var quotedMsg = await msg.getQuotedMessage();
             var data = await youtube.mainF(quotedMsg.body);
             if (data == "error") {
@@ -236,7 +236,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!weather ")) { // Weather Module
 
-            msg.delete(true)
+            
             var data = await weather.mainF(msg.body.replace("!weather ", ""));
             if (data == "error") {
                 client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch Weather```")
@@ -246,7 +246,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!tr") && msg.hasQuotedMsg) { // Translator Module reply
 
-            msg.delete(true)
+            
             var quotedMsg = await msg.getQuotedMessage()
             var data = await translator.argu(quotedMsg.body, msg.body)
             if (data == "error") {
@@ -257,7 +257,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!tr")) { // Translator Module
 
-            msg.delete(true)
+            
             var data = await translator.single(msg.body)
             if (data == "error") {
                 client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened while translate```")
@@ -267,7 +267,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body.startsWith("!ud ")) { // Urban Dictionary Module
 
-            msg.delete(true)
+            
             var data = await ud.mainF(msg.body.replace("!ud ", ""))
             if (data == "error") {
                 client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened while Lookup on Urban Dictionary```")
@@ -276,13 +276,13 @@ client.on('message_create', async(msg) => {
             }
         } else if (msg.body.startsWith("!sticker") && msg.hasQuotedMsg) { // Sticker Module
 
-            msg.delete(true)
+            
             var quotedMsg = await msg.getQuotedMessage();
             if (quotedMsg.hasMedia) {
                 var attachmentData = await quotedMsg.downloadMedia();
                 client.sendMessage(msg.to, new MessageMedia(attachmentData.mimetype, attachmentData.data, attachmentData.filename), { sendMediaAsSticker: true });
             } else {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```No image found to make a Sticker```")
+                client.sendMessage(msg.to, `🙇‍♂️ *Sorry,*` + "```only images are supported yet```")
             }
         } else if (msg.body == "!awake") {
             client.sendPresenceAvailable()
@@ -294,7 +294,7 @@ client.on('message_create', async(msg) => {
 client.on('message_revoke_everyone', async(after, before) => {
     if (before) {
         if (before.fromMe !== true && before.hasMedia !== true && before.author == undefined && config.enable_delete_alert == "true") {
-            client.sendMessage(before.from, "_You deleted this message_ 👇👇\n\n" + before.body)
+            client.sendMessage(before.from, "*Haha Yes,* Caught You😁\n\n_You deleted this message:_\n\n" + before.body)
         }
     }
 });
@@ -305,7 +305,7 @@ client.on('disconnected', (reason) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('<h1>This server is powered by Whatsbot<br><a href="https://github.com/TheWhatsBot/WhatsBot">https://github.com/TheWhatsBot/WhatsBot</a></h1>')
+    res.send('<h1>This server is active and running AloneBots</h1>')
 })
 
 app.use('/public', express.static('public'), serveIndex('public', { 'icons': true })) // public directory will be publicly available
