@@ -10,9 +10,9 @@ async function get(battery, phn_info) {
     }
 
     return ({
-        msg: `*Whatsbot* _(1.5.0)_\n\nThis chat is Powered By *Whatsbot*\n\n*Battery:* ${batttxt}\n*Device:* ${phn_info.device_manufacturer} ${phn_info.device_model}\n*WA Version:* ${phn_info.wa_version}\n*Pmpermit:* ${config.pmpermit_enabled}\n*Mutetime:* ${config.pmpermit_mutetime/60} Minutes\n\n*Official Repository Url 👇*\n` + "```https://github.com/TheWhatsBot/WhatsBot```",
+        msg: `*AloneBots~:*\n\nThis is modified version of *Whatsbot* by Alone🙂\n\n*Device:* ${phn_info.device_manufacturer} Note 5 Pro (${phn_info.device_model})\n*Battery:* ${batttxt}\n*Bot Version:* ${phn_info.wa_version}\n*Pmpermit:* ${config.pmpermit_enabled}\n*Mutetime:* ${config.pmpermit_mutetime/60} Minutes\n\n*For more Information*\n` + "```https://t.me/Alone215```",
         mimetype: "image/jpeg",
-        data: Buffer.from(((await axios.get('https://telegra.ph/file/ecbc27f276890bf2f65a2.jpg', { responseType: 'arraybuffer' })).data)).toString('base64'),
+        data: Buffer.from(((await axios.get('https://telegra.ph/file/ab6d3cf0089d151fb044b.jpg', { responseType: 'arraybuffer' })).data)).toString('base64'),
         filename: "start.jpg"
     })
 }
