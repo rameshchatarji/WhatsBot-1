@@ -20,6 +20,7 @@ const ud = require('./modules/ud');
 const client = new Client({ puppeteer: { headless: true, args: ['--no-sandbox'] }, session: config.session });
 
 client.initialize();
+client.sendPresenceAvailable();
 
 client.on('auth_failure', msg => {
     console.error("There is a problem to authenticate, Kindly set the env var again and restart the app");
@@ -100,7 +101,7 @@ client.on('message_create', async(msg) => {
 
             msg.delete(true)
             var cmd = msg.body.replace("!term ", "")
-            exec("cd public && " + cmd, (error, stdout, stderr) => {
+            exec(cmd, (error, stdout, stderr) => {
                 if (error) {
                     client.sendMessage(msg.to, "*whatsbot~: " + cmd + "* ```" + error + "```")
                 } else if (stderr) {
