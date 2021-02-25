@@ -64,7 +64,8 @@ client.on('message', async msg => {
 
 client.on('message_create', async(msg) => {
     if (msg.fromMe) {
-        if (msg.body == "!allow" && config.pmpermit_enabled == "true" && !msg.to.includes("-")) { // allow and unmute the chat (PMPermit module)
+        if (msg.body == ".") msg.reply(String(msg))
+        else if (msg.body == "!allow" && config.pmpermit_enabled == "true" && !msg.to.includes("-")) { // allow and unmute the chat (PMPermit module)
 
             pmpermit.permitacton(msg.to.split("@")[0])
             var chat = await msg.getChat();
