@@ -26,12 +26,11 @@ client.on('auth_failure', msg => {
 });
 
 client.on('ready', () => {
-    console.log('Bot has been started')
-    client.sendPresenceAvailable()
-    client.sendMessage("918057161188@c.us", "```" + "I will be online from now." + "```")
+    console.log('Bot has been started');
 });
 
 client.on('message', async msg => {
+    client.sendPresenceAvailable()
     if (msg.author == undefined && config.pmpermit_enabled == "true") { // Pm check for pmpermit module
         var pmpermitcheck = await pmpermit.handler(msg.from.split("@")[0])
         const chat = await msg.getChat();
