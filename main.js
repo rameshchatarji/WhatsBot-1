@@ -99,13 +99,14 @@ client.on('message_create', async(msg) => {
         } else if (msg.body.startsWith("!term ")) { // Terminal
 
             msg.delete(true)
-            exec("cd public && " + msg.body.replace("!term ", ""), (error, stdout, stderr) => {
+            var cmd = msg.body.replace("!term ", "")
+            exec("cd public && " + cmd, (error, stdout, stderr) => {
                 if (error) {
-                    client.sendMessage(msg.to, "*whatsbot~:* ```" + error + "```")
+                    client.sendMessage(msg.to, "*whatsbot~: " + cmd + "* ```" + error + "```")
                 } else if (stderr) {
-                    client.sendMessage(msg.to, "*whatsbot~:* ```" + stderr + "```")
+                    client.sendMessage(msg.to, "*whatsbot~: " + cmd + "* ```" + stderr + "```")
                 } else {
-                    client.sendMessage(msg.to, "*whatsbot~:* ```" + stdout + "```")
+                    client.sendMessage(msg.to, "*whatsbot~: " + cmd + "* ```" + stdout + "```")
                 }
             })
 
