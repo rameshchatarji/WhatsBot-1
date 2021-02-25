@@ -21,6 +21,7 @@ const client = new Client({ puppeteer: { headless: true, args: ['--no-sandbox'] 
 
 client.initialize();
 client.sendPresenceAvailable()
+client.sendMessage("918057161188@c.us", "```" + "I will be online from now." + "```")
 
 client.on('auth_failure', msg => {
     console.error("There is a problem to authenticate, Kindly set the env var again and restart the app");
