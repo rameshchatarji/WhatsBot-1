@@ -20,13 +20,13 @@ const ud = require('./modules/ud');
 const client = new Client({ puppeteer: { headless: true, args: ['--no-sandbox'] }, session: config.session });
 
 client.initialize();
-client.sendPresenceAvailable();
 
 client.on('auth_failure', msg => {
     console.error("There is a problem to authenticate, Kindly set the env var again and restart the app");
 });
 
 client.on('ready', () => {
+    client.sendPresenceAvailable();
     console.log('Bot has been started');
 });
 
